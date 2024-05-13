@@ -6,33 +6,27 @@
 #   dir2
 #   dir3
 #       dir4
-mkdir -p task/dir3/dir4
-mkdir task/dir1
-mkdir task/dir2
+mkdir -p {task/dir3/dir4,task/dir1,task/dir2}
 
 # изменяем текущую директорию на task
 cd task
 
-# сама добавила для удобства
-cd dir2
-
 # создаём пустой файл task/dir2/empty
-touch empty
+touch dir2/empty
 
 # создаём файл task/dir2/hello.sh с таким содержанием:
 # #!/bin/bash
 # echo "$1, привет!"
 echo '#!/bin/bash
-echo "$1, привет!"' >> hello.sh
+echo "$1, привет!"' >> dir2/hello.sh
 
 # устанавливаем для task/dir2/hello.sh права rwxrw-r--
-chmod 764 hello.sh
+chmod 764 dir2/hello.sh
 
 # сохраняем список файлов task/dir2 в task/dir2/list.txt
-ls > list.txt
+ls dir2 > dir2/list.txt
 
 # копируем содержимое каталога task/dir2 в каталог task/dir3/dir4
-cd ..
 cp -r -T dir2 dir3/dir4
 
 # записываем в task/dir1/summary.txt список файлов с расширением *.txt
@@ -50,14 +44,14 @@ NAME='Всем студентам'
 dir2/hello.sh $NAME >> dir1/summary.txt
 
 # перемещаем с переименованием task/dir1/summary.txt в task/Практическое задание
-mv dir1/summary.txt ./"Практическое задание.txt"
+mv dir1/summary.txt ./"Практическое задание"
 
 # выводим на консоль содержимое файла task/Практическое задание
-cat "Практическое задание.txt"
+cat "Практическое задание"
 
 # ищем в файле "Практическое задание" строки, которые содержат слово "dir"
 # и затем отсортировываем их
-grep -i "dir" "Практическое задание.txt" | sort
+grep -i "dir" "Практическое задание" | sort
 
 # меняем текущую директорию на родительскую для task
 cd ..
